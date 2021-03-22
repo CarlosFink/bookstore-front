@@ -18,14 +18,23 @@ export class CategoriaService {
 
   findAll(): Observable<Categoria[]> {
     const url = `${environment.baseUrl}/categorias`
-    return this.http.get<Categoria[]>(url).pipe(take(1));
+    return this.http.get<Categoria[]>(url).pipe(take(1))
   }
+
+  findById(id: String): Observable<Categoria>  {
+    const url = `${environment.baseUrl}/categorias/${id}`
+    return this.http.get<Categoria>(url).pipe(take(1))
+  } 
 
   create(categoria: Categoria): Observable<Categoria> {
     const url = `${environment.baseUrl}/categorias`
     return this.http.post<Categoria>(url, categoria).pipe(take(1))
   }
 
+  delete(id: String): Observable<void> {
+    const url = `${environment.baseUrl}/categorias/${id}`
+    return this.http.delete<void>(url).pipe(take(1))
+  }
   message(msg: string): void {
     this.snack.open(msg, 'OK', {
       horizontalPosition: 'end',
